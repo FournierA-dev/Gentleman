@@ -1,0 +1,47 @@
+<!-- Bandeau d'alerte -->
+    <% if player.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p><small>Nous n'avons pas réussi à créer le joueur pour la (ou les) raison(s) suivante(s) :</small></p>
+        <ul><small>
+          <% player.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </small></ul>
+      </div>
+    <% end %>
+
+
+
+<section class ="container mt-3">
+
+  <!-- Formulaire -->
+  <div class="col-8 col-md-4 my-4" >
+    <%= form_for [:admin, player] do |f| %>
+      <div class="form-group">
+        <label> <%=f.label :first_name,"Prénom" %> </label>
+        <%=f.text_field :first_name, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <label> <%=f.label :last_name,"Nom" %> </label>
+        <%=f.text_field :last_name, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <label> <%=f.label :role,"Rôle" %> </label>
+        <%= f.select(:role,options_for_select([['Non défini', "N/D"],['Avant', "Avant"],['Arrière', "Avant"],['Remplacant', "Remplacant"]])) %>
+      </div>
+      <div class="form-group">
+        <label> <%=f.label :tel_number,"Telephone" %> </label>
+        <%=f.text_field :tel_number, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <label> <%=f.label :email,"E-mail" %> </label>
+        <%=f.text_field :email, class:'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary"> Créer le joueur </button>
+      </div>
+    <% end %>
+  </div>
+
+</section>

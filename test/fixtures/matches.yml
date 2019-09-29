@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 
+  team1: one
+  team2: one
+
+two:
+  date: 
+  team1: two
+  team2: two

@@ -1,0 +1,48 @@
+<%= render 'components/jumbotron' %>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Téléphone</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Rôle</th>
+        <th scope="col">Equipe</th>
+        <th scope="col">Equipier</th>
+        <th scope="col">Poule</th>
+        <th scope="col">score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @players.each_with_index do |player,index| %>
+        <tr>
+          <th scope="row"> <%= index +1 %> </th>
+          <td><%= player.first_name %></td>
+          <td><%= player.last_name %></td>
+          <td><%= player.tel_number %></td>
+          <td><%= player.email %></td>
+          <td><%= player.role %></td>
+
+          <%if !player.team %>
+            <% 4.times do %>
+              <td class="text-danger"> N/D </td>
+            <%end%>
+          <%else%>
+            <td><%= player.team.name %></td>
+            <td> <%=player.team.players.where.not(id: player.id) %> </td>
+            <%if !player.team.pool %>
+              <td class="text-danger"> N/D </td>
+            <%else%>
+              <td><%= team.pool %></td>
+            <%end%>
+            <td><%= team.total_score %></td>
+          <%end%>
+
+        </tr> 
+      <%end%>
+    </tbody>
+  </table>
+</div>
+

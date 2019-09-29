@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  total_score: 1
+  pool: one
+  player1: one
+  player2: one
+
+two:
+  name: MyString
+  total_score: 1
+  pool: two
+  player1: two
+  player2: two

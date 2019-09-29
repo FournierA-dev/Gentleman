@@ -1,0 +1,37 @@
+<div class="container">
+  <%= link_to "Nouveau joueur", new_admin_player_path, class: "btn btn-primary my-2"%>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Téléphone</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Rôle</th>
+        <th scope="col">ACTIONS</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @players.each_with_index do |player,index| %>
+        <tr>
+          <th scope="row"> <%= index +1 %> </th>
+          <td><%= player.first_name %></td>
+          <td><%= player.last_name %></td>
+          <td><%= player.tel_number %></td>
+          <td><%= player.email %></td>
+          <td><%= player.role %></td>
+          <td>
+            <%= link_to "Editer", edit_admin_player_path(player), :class => 'btn btn-warning' %>
+            <%= link_to "Supprimer", admin_player_path(player), method: :delete, :confirm => 'Etes-vous sûre ?', :class => 'btn btn-danger' %>
+          </td>
+
+
+
+        </tr> 
+      <%end%>
+    </tbody>
+  </table>
+</div>
+
