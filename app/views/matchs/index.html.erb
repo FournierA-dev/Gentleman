@@ -1,2 +1,41 @@
-<h1>Matchs#index</h1>
-<p>Find me in app/views/matchs/index.html.erb</p>
+<%= render partial: 'components/jumbotron', locals: {title: "Gentlemen league",subtitle: "Vos matchs", image: '4.jpg' } %>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Equipe adverse</th>
+        <th scope="col">Score équipe</th>
+        <th scope="col">Score adversaire</th>
+        <th scope="col">ACTIONS</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @matchs.each_with_index do |match,index| %>
+        <tr>
+        <%opponent =  match.teams.where.not(id: current_player.team.id)[0]%>
+          <th scope="row"> <%= index +1 %> </th>
+          <td> 
+            <%if match.date.blank?%>
+              <%= link_to "Proposer date", edit_match_path(match), :class => 'btn btn-success' %>
+            <%else%>
+              <%= match.date %>  <%= link_to "Modifier date", "", :class => 'btn btn-warning' %>
+            <%end%>
+          </td>
+          <td> <a href="<%= team_path(opponent) %>"><%=opponent.name %></a> </td>
+          <td> <%= match.scores.where(team_id:  current_player.team.id)[0] %> </td>
+          <td> <%= match.scores.where.not(team_id:  current_player.team.id)[0] %> </td>
+          <td>
+            <%if match.scores.blank?%>
+              <%= link_to "Rentrer le score", new_match_score_path(match), :class => 'btn btn-success' %>
+            <%else%>
+              <%= link_to "Modifier le score", edit_match_score_path(match), :class => 'btn btn-success' %>
+            <%end%>
+          </td>
+        </tr> 
+      <%end%>
+    </tbody>
+  </table>
+</div>

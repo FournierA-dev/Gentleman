@@ -1,0 +1,41 @@
+<% if @pool.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <p><small>Nous n'avons pas réussi à créer la poule pour la (ou les) raison(s) suivante(s) :</small></p>
+    <ul><small>
+      <% @pool.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </small></ul>
+  </div>
+<% end %>
+
+<div class="container">
+  <%= link_to "Nouvelle poule", admin_pools_path, method: :post, class: "btn btn-primary my-2"%>
+
+  <% if @pools.count == 0 %>
+    <h2> Aucune poule n'a encore été créée </h2>
+    <p> La création d'au moins une poule est nécessaire pour créer des équipes </p>
+  <% else %>
+    <% @pools.each do |pool| %>
+      <div class="container">
+        <div class="col-12 py-4">
+          <h2 class="d-inline"> Poule <%= pool.name %> </h2>
+          <%= link_to "Supprimer", admin_pool_path(pool), method: :delete, :confirm => 'Etes-vous sûre ?', :class => 'btn btn-danger d-inline ml-5' %>
+          <%= render partial:"addTeamToPool",locals: {pool: pool} %>
+          <p class="my-0 mt-3"> Nombre d'équipes : <%= pool.teams.count %> </p>
+          <p class="my-0"> Nombre de matchs prévus : <%= pool_match_count(pool) %> </p>
+          <p class="my-0"> Nombre de matchs réalisés : <%= pool_match_done(pool) %> </p>
+          <p class="my-0"> Avancement : 
+            <% if pool_match_count(pool) == 0%>
+              0 %
+            <% else %>
+              <%= pool_match_done(pool)/ (pool_match_count(pool)*1.0) * 100 %> % 
+            <% end %>
+          </p>
+        </div>
+        <%= render partial:"poolTeamsTable",locals: {pool: pool} %>
+      </div>
+    <% end %>
+  <%end %>
+
+</div>

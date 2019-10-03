@@ -1,0 +1,38 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Equipe</th>
+      <th scope="col">Poule</th>
+      <th scope="col">Score total</th>
+      <th scope="col">Matchs joués</th>
+      <th scope="col">Points moyens / match</th>
+      <th scope="col">Joueur 1</th>
+      <th scope="col">Joueur 2</th>
+      <th scope="col">Joueur 3</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% teams.each_with_index do |team,index| %>
+      <tr>
+        <th scope="row"> <%= index +1 %> </th>
+        <td> <a href="<%= team_path(team) %>" class="class"> <%= team.name %> </a> </td>
+        <td> <%= team.pool.name %> </td>
+        <td> <%= team.total_score %></td>
+        <td> <%= team_match_done(team) %></td>
+        <td> <%= team_match_done(team) *1.0 / team.matchs.count %></td>
+        <% team.players.each_with_index do |player,index| %>
+          <td> <%= player.first_name %>  <%= player.last_name %> </td>
+        <%end%>
+        <%if team.players.count == 0%>
+          <td></td> <td></td> <td></td>
+        <%elsif team.players.count == 1%>
+          <td></td> <td></td>
+        <%elsif team.players.count == 2%>
+          <td></td>
+        <%end%>
+      </tr> 
+    <%end%>
+  </tbody>
+</table>

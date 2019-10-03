@@ -1,0 +1,19 @@
+<div class="container ">
+  <div class="row">
+    <div class="col-12">
+      <%= image_tag "2.jpg", class: "img-fluid rounded float-left mr-3" %>
+      <h2><%= @team.name %></h2>
+      <ul>
+        <% @team.players.each do |player| %>
+          <li class="my-3"> <%= player.role %> : <%= player.first_name %> <%= player.last_name %> </li>
+        <%end%>
+        <li class="my-3">Nb matchs joués : </li>
+        <li class="my-3">% matchs gagnés : </li>
+        <li class="my-3">Nb matchs restants : </li>
+      </ul>
+    </div>
+    <div class="col-12">
+      <%= render partial: "teamShowTable", locals:{team: @team} %>
+    </div>
+  </div>
+</div>
