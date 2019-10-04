@@ -1,0 +1,35 @@
+<!-- Bandeau d'alerte -->
+    <% if @team_score.errors.any?  %>
+      <div class="alert alert-danger" role="alert">
+        <p><small>Nous n'avons pas réussi à créer/modifier le score de votre équipe pour la (ou les) raison(s) suivante(s) :</small></p>
+        <ul><small>
+          <% @team_score.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </small></ul>
+      </div>
+    <% end %>
+
+
+<section class ="container col-6 mx-auto mt-3">
+
+  <!-- Formulaire -->
+  <div class="col-8 col-md-4 my-4" >
+    <%= form_for [@match,@team_score] do |f| %>
+      <div class="form-group">
+        <label> <%=f.label :score,"Score équipe" %> </label>
+        <%=f.text_field :score, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <label> <%=f.label "Score adversaire" %> </label>
+        <%=f.text_field :opponent_score, class:'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary"> Sauvegarder le score </button>
+      </div>
+    <% end %>
+    <%= link_to "Retour", :back, class:"btn btn-outline-secondary" %>
+  </div>
+
+</section>

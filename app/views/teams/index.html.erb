@@ -7,4 +7,5 @@
     <% else %>
         <%= render partial:"teamsTable",locals: {teams: @teams} %>
     <%end%>
+    <%= link_to "Retour", :back, class:"btn btn-outline-secondary" %>
 </div>

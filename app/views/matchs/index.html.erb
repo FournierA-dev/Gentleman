@@ -25,17 +25,26 @@
             <%end%>
           </td>
           <td> <a href="<%= team_path(opponent) %>"><%=opponent.name %></a> </td>
-          <td> <%= match.scores.where(team_id:  current_player.team.id)[0] %> </td>
-          <td> <%= match.scores.where.not(team_id:  current_player.team.id)[0] %> </td>
+          <td> 
+            <% if match.scores.where(team_id:  current_player.team.id)[0]%>
+              <%= match.scores.where(team_id:  current_player.team.id)[0].score %> 
+            <%end%>
+          </td>
+          <td> 
+            <% if match.scores.where.not(team_id:  current_player.team.id)[0]%>
+              <%= match.scores.where.not(team_id:  current_player.team.id)[0].score %> 
+            <%end%>
+          </td>
           <td>
             <%if match.scores.blank?%>
               <%= link_to "Rentrer le score", new_match_score_path(match), :class => 'btn btn-success' %>
             <%else%>
-              <%= link_to "Modifier le score", edit_match_score_path(match), :class => 'btn btn-success' %>
+              <%= link_to "Modifier le score", edit_match_score_path(match,match.scores.where(team_id: current_player.team.id)), :class => 'btn btn-warning' %>
             <%end%>
           </td>
         </tr> 
       <%end%>
     </tbody>
   </table>
+<%= link_to "Retour", :back, class:"btn btn-outline-secondary" %>
 </div>

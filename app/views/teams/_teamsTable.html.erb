@@ -21,7 +21,11 @@
         <td> <%= team.pool.name %> </td>
         <td> <%= team.total_score %></td>
         <td> <%= team_match_done(team) %></td>
-        <td> <%= team_match_done(team) *1.0 / team.matchs.count %></td>
+        <% if !team.total_score.blank? %>
+          <td> <%= team.total_score * 1.0 / team_match_done(team) %> </td>
+        <%else%>
+          <td></td>
+        <%end%>
         <% team.players.each_with_index do |player,index| %>
           <td> <%= player.first_name %>  <%= player.last_name %> </td>
         <%end%>

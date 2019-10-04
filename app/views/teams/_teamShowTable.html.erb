@@ -15,8 +15,8 @@
       <% @team.matchs.each_with_index do |match,index| %>
         <% if match.scores.count > 0 %>
           <%opponent = match.teams.where.not(id: @team.id)[0]%>
-          <%team_score = match.scores.where(team_id:  @team.id)[0]%>
-          <%opponent_score = match.scores.where.not(team_id:  @team.id)[0]%>
+          <%team_score = match.scores.where(team_id:  @team.id)[0].score.to_i%>
+          <%opponent_score = match.scores.where.not(team_id:  @team.id)[0].score.to_i%>
           <tr>
             <th scope="row"> <%= index +1 %> </th>
             <td> <%= match.date %></td>
