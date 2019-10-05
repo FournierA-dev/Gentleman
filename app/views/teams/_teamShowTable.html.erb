@@ -1,36 +1,38 @@
 <div class="container">
-<div class="text-bold font-weight-bold my-4"> RESULTATS DES MATCHS JOUES </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Date</th>
-        <th scope="col">Gagné/Perdu</th>
-        <th scope="col">Equipe adverse</th>
-        <th scope="col">Score équipe</th>
-        <th scope="col">Score adversaire</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @team.matchs.each_with_index do |match,index| %>
-        <% if match.scores.count > 0 %>
-          <%opponent = match.teams.where.not(id: @team.id)[0]%>
-          <%team_score = match.scores.where(team_id:  @team.id)[0].score.to_i%>
-          <%opponent_score = match.scores.where.not(team_id:  @team.id)[0].score.to_i%>
-          <tr>
-            <th scope="row"> <%= index +1 %> </th>
-            <td> <%= match.date %></td>
-              <% if team_score > opponent_score %>
-                <td class="text-success"> Gagné</td>
-              <% else %>
-                <td class="text-danger"> Perdu</td>
-              <% end %>
-            <td> <a href="<%= team_path(opponent) %>"> <%= opponent.name %> </a></td>
-            <td> <%= team_score %> </td>
-            <td> <%= opponent_score %> </td>
-          </tr> 
+  <div class="text-bold font-weight-bold my-4"> RESULTATS DES MATCHS JOUES </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">Gagné/Perdu</th>
+          <th scope="col">Equipe adverse</th>
+          <th scope="col">Score équipe</th>
+          <th scope="col">Score adversaire</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @team.matchs.each_with_index do |match,index| %>
+          <% if match.scores.count > 0 %>
+            <%opponent = match.teams.where.not(id: @team.id)[0]%>
+            <%team_score = match.scores.where(team_id:  @team.id)[0].score.to_i%>
+            <%opponent_score = match.scores.where.not(team_id:  @team.id)[0].score.to_i%>
+            <tr>
+              <th scope="row"> <%= index +1 %> </th>
+              <td> <%= match.date %></td>
+                <% if team_score > opponent_score %>
+                  <td class="text-success"> Gagné</td>
+                <% else %>
+                  <td class="text-danger"> Perdu</td>
+                <% end %>
+              <td> <a href="<%= team_path(opponent) %>"> <%= opponent.name %> </a></td>
+              <td> <%= team_score %> </td>
+              <td> <%= opponent_score %> </td>
+            </tr> 
+          <%end%>
         <%end%>
-      <%end%>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>

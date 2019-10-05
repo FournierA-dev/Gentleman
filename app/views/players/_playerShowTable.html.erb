@@ -1,44 +1,46 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
       <tr>
-        <th scope="row"> Nom </th>
-        <td> <%= @player.last_name %></td>
-      </tr> 
-      <tr>
-        <th scope="row"> Prénom </th>
-        <td><%= @player.first_name %></td>
-      </tr> 
-      <tr>
-        <th scope="row"> Role </th>
-        <td><%= @player.role %></td>
-      </tr> 
-      <tr>
-        <th scope="row"> Téléphone </th>
-        <td><%= @player.tel_number %></td>
-      </tr> 
-      <tr>  
-        <th scope="row"> E-mail </th>
-        <td><%= @player.email %></td>
-      </tr> 
-      <tr>
-        <th scope="row"> Liens pros </th>
-        <td>
-          <% if !@player.linkedin.blank?%>
-            <a href="<%= @player.linkedin %>" target="_blank" class="mx-2"><i class="fa fa-linkedin"></i></a>
-          <%end%>
-          <% if !@player.viadeo.blank?%>
-            <a href="<%= @player.viadeo %>" target="_blank" class="mx-2"><i class="fa fa-viadeo"></i></a>
-          <%end%>
-        </td>
-      </tr> 
+        <th scope="col">#</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <th scope="row"> Nom </th>
+          <td> <%= @player.last_name %></td>
+        </tr> 
+        <tr>
+          <th scope="row"> Prénom </th>
+          <td><%= @player.first_name %></td>
+        </tr> 
+        <tr>
+          <th scope="row"> Role </th>
+          <td><%= @player.role %></td>
+        </tr> 
+        <tr>
+          <th scope="row"> Téléphone </th>
+          <td><%= @player.tel_number %></td>
+        </tr> 
+        <tr>  
+          <th scope="row"> E-mail </th>
+          <td><%= @player.email %></td>
+        </tr> 
+        <tr>
+          <th scope="row"> Liens pros </th>
+          <td>
+            <% if !@player.linkedin.blank?%>
+              <a href="<%= @player.linkedin %>" target="_blank" class="mx-2"><i class="fa fa-linkedin"></i></a>
+            <%end%>
+            <% if !@player.viadeo.blank?%>
+              <a href="<%= @player.viadeo %>" target="_blank" class="mx-2"><i class="fa fa-viadeo"></i></a>
+            <%end%>
+          </td>
+        </tr> 
 
-      <i class="fab fa-linkedin-in"></i>
+        <i class="fab fa-linkedin-in"></i>
 
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>

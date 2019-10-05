@@ -1,36 +1,38 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Poule</th>
-      <th scope="col">Equipe</th>
-      <th scope="col">Joueur 1</th>
-      <th scope="col">Joueur 2</th>
-      <th scope="col">Joueur 3</th>
-      <th scope="col">ACTIONS</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <% teams.each_with_index do |team,index| %>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
       <tr>
-        <th scope="row"> <%= index +1 %> </th>
-        <td> <%= team.pool.name %> </td>
-        <td> <%= team.name %> </td>
-        <% team.players.each_with_index do |player,index| %>
-          <td> <%=player.first_name %>  <%= player.last_name %> </td>
-        <%end%>
-        <%if team.players.count == 0%>
-          <td></td> <td></td> <td></td>
-        <%elsif team.players.count == 1%>
-          <td></td> <td></td>
-        <%elsif team.players.count == 2%>
-          <td></td>
-        <%end%>
-        <td>
-          <%= link_to "Supprimer", admin_team_path(team), method: :delete, :data => {:confirm => 'Etes-vous sûr ?'}, :class => 'btn btn-danger' %>
-        </td>
-      </tr> 
-    <%end%>
-  </tbody>
-</table>
+        <th scope="col">#</th>
+        <th scope="col">Poule</th>
+        <th scope="col">Equipe</th>
+        <th scope="col">Joueur 1</th>
+        <th scope="col">Joueur 2</th>
+        <th scope="col">Joueur 3</th>
+        <th scope="col">ACTIONS</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% teams.each_with_index do |team,index| %>
+        <tr>
+          <th scope="row"> <%= index +1 %> </th>
+          <td> <%= team.pool.name %> </td>
+          <td> <%= team.name %> </td>
+          <% team.players.each_with_index do |player,index| %>
+            <td> <%=player.first_name %>  <%= player.last_name %> </td>
+          <%end%>
+          <%if team.players.count == 0%>
+            <td></td> <td></td> <td></td>
+          <%elsif team.players.count == 1%>
+            <td></td> <td></td>
+          <%elsif team.players.count == 2%>
+            <td></td>
+          <%end%>
+          <td>
+            <%= link_to "Supprimer", admin_team_path(team), method: :delete, :data => {:confirm => 'Etes-vous sûr ?'}, :class => 'btn btn-danger' %>
+          </td>
+        </tr> 
+      <%end%>
+    </tbody>
+  </table>
+</div>
