@@ -1,0 +1,13 @@
+    <%= form_for match do |f| %>
+      <div class="form-group">
+        <%= f.datetime_select :date, :ampm => true, :minute_step => 15, class:'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%if type =="create" %>
+          <button type="submit" class="btn btn-success"> Proposer date </button>
+        <%else%>
+          <button type="submit" class="btn btn-warning"> Modifier date </button>
+        <%end%>
+      </div>
+    <% end %>

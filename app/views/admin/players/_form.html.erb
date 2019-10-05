@@ -27,11 +27,7 @@
       </div>
       <div class="form-group">
         <label> <%=f.label :role,"Rôle" %> </label>
-        <%= f.select(:role,options_for_select([['Non défini', "N/D"],['Avant', "Avant"],['Arrière', "Avant"]])) %>
-      </div>
-      <div class="form-group">
-        <label> <%=f.label :tel_number,"Telephone" %> </label>
-        <%=f.text_field :tel_number, class:'form-control' %>
+        <%= f.select(:role,options_for_select([['Non défini', "N/D"],['Avant', "Avant"],['Arrière', "Arrière"]],player.role)) %>
       </div>
       <div class="form-group">
         <label> <%=f.label :email,"E-mail" %> </label>

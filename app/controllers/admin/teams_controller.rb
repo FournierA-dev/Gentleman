@@ -72,11 +72,8 @@ private
     end
 
     def team_number_test?(selected_teams_nb)
-      if selected_teams_nb < 2
-        redirect_to admin_teams_path ,warning: "Une équipe doit être constituée de 2 joueurs minimum"
-        return false
-      elsif selected_teams_nb > 3
-        redirect_to admin_teams_path ,warning: "Une équipe doit être constituée de 3 joueurs maximums (dont 1 remplacant)"
+      if selected_teams_nb != 2
+        redirect_to admin_teams_path ,warning: "Une équipe doit être constituée de 2 joueurs"
         return false
       else
         return true

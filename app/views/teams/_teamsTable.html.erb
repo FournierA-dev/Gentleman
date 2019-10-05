@@ -10,7 +10,6 @@
         <th scope="col">Points moyens / match</th>
         <th scope="col">Joueur 1</th>
         <th scope="col">Joueur 2</th>
-        <th scope="col">Joueur 3</th>
       </tr>
     </thead>
     <tbody>
@@ -31,11 +30,9 @@
             <td> <%= player.first_name %>  <%= player.last_name %> </td>
           <%end%>
           <%if team.players.count == 0%>
-            <td></td> <td></td> <td></td>
+            <td></td> <td></td> 
           <%elsif team.players.count == 1%>
-            <td></td> <td></td>
-          <%elsif team.players.count == 2%>
-            <td></td>
+            <td></td> 
           <%end%>
         </tr> 
       <%end%>

@@ -3,16 +3,26 @@ class MatchsController < ApplicationController
   before_action :authenticate_player!
 
   def index #Liste de tous les prochains matchs programmés
-    @team = @matchs = current_player.team
+    @team = current_player.team
     if @team
-      @matchs = current_player.team.matchs
+      @matchs = @team.matchs
     else
       @matchs
     end
   end
 
-  def edit
-    
+  def update
+    @match = Match.find(params[:id])
+    if @match.update(match_params)
+      redirect_to matchs_path, success: "Date créée/modifiée avec succès ! L'équipe adverse recevra un mail de confirmation"
+    else
+      render matchs_path, danger: "Erreur dans la modification / création de la date de jeu"
+    end
+  end
+
+
+  def match_params
+    params.require(:match).permit(:date)
   end
 
 end

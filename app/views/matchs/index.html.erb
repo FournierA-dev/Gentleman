@@ -1,7 +1,7 @@
 <%= render partial: 'components/jumbotron', locals: {title: "Gentlemen league",subtitle: "Vos matchs", image: '4.jpg' } %>
 <div class="container">
 
-  <% if !@teams %>
+  <% if !@team %>
       <h2> Vous ne faite parti d'aucune équipe... </h2>
       <p> Rapprochez-vous de l'organisateur de l'événement </p>
   <% else %>
@@ -25,9 +25,10 @@
               <th scope="row"> <%= index +1 %> </th>
               <td> 
                 <%if match.date.blank?%>
-                  <%= link_to "Proposer date", edit_match_path(match), :class => 'btn btn-success' %>
+                  <%= render partial: "dateForm", locals:{match: match, type: "create"} %>
                 <%else%>
-                  <%= match.date %>  <%= link_to "Modifier date", "", :class => 'btn btn-warning' %>
+                  <p><%= match.date %></p>
+                  <%= render partial: "dateForm", locals:{match: match, type: "update"} %>
                 <%end%>
               </td>
               <td> <a href="<%= team_path(opponent) %>"><%=opponent.name %></a> </td>

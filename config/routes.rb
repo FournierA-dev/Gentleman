@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :players
   resources :players, only: [:show, :edit, :update, :index]
   resources :teams, only: [:index, :show]
-  resources :matchs, only: [:index,:edit] do
+  resources :matchs, only: [:index,:update] do
     resources :scores, only: [:new, :create, :edit, :update]
   end
   

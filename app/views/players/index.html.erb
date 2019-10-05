@@ -1,40 +1,42 @@
 <%= render partial: 'components/jumbotron', locals: {title: "Gentlemen league",subtitle: "Les gentlemen", image: '1.jpg' } %>
 
-<div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Prénom</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Téléphone</th>
-        <th scope="col">E-mail</th>
-        <th scope="col">Rôle</th>
-        <th scope="col">Liens pro</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @players.each_with_index do |player,index| %>
+<div class="container">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
         <tr>
-          <th scope="row"> <%= index +1 %> </th>
-          <td><%= player.first_name %></td>
-          <td><%= player.last_name %></td>
-          <td><%= player.tel_number %></td>
-          <td><%= player.email %></td>
-          <td><%= player.role %></td>
-          <td>
-            <% if !player.linkedin.blank?%>
-              <a href="<%= player.linkedin %>" target="_blank" class="mx-2"><i class="fa fa-linkedin"></i></a>
-            <%end%>
-            <% if !player.viadeo.blank?%>
-              <a href="<%= player.viadeo %>" target="_blank" class="mx-2"><i class="fa fa-viadeo"></i></a>
-            <%end%>
-          </td>
-        </tr> 
-      <%end%>
-    </tbody>
-  </table>
-</div>
-<div class="contain">
+          <th scope="col">#</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Téléphone</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Rôle</th>
+          <th scope="col">Liens pro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @players.each_with_index do |player,index| %>
+          <tr>
+            <th scope="row"> <%= index +1 %> </th>
+            <td><%= player.first_name %></td>
+            <td><%= player.last_name %></td>
+            <td><%= player.tel_number %></td>
+            <td><%= player.email %></td>
+            <td><%= player.role %></td>
+            <td>
+              <% if !player.linkedin.blank?%>
+                <a href="<%= player.linkedin %>" target="_blank" class="mx-2"><i class="fa fa-linkedin"></i></a>
+              <%end%>
+              <% if !player.viadeo.blank?%>
+                <a href="<%= player.viadeo %>" target="_blank" class="mx-2"><i class="fa fa-viadeo"></i></a>
+              <%end%>
+            </td>
+          </tr> 
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+
   <%= render "components/returnButton" %>
+
 </div>
