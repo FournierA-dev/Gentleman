@@ -10,6 +10,7 @@
         <th scope="col">Téléphone</th>
         <th scope="col">E-mail</th>
         <th scope="col">Rôle</th>
+        <th scope="col">Liens pro</th>
       </tr>
     </thead>
     <tbody>
@@ -21,7 +22,14 @@
           <td><%= player.tel_number %></td>
           <td><%= player.email %></td>
           <td><%= player.role %></td>
-
+          <td>
+            <% if !player.linkedin.blank?%>
+              <a href="<%= player.linkedin %>" target="_blank" class="mx-2"><i class="fa fa-linkedin"></i></a>
+            <%end%>
+            <% if !player.viadeo.blank?%>
+              <a href="<%= player.viadeo %>" target="_blank" class="mx-2"><i class="fa fa-viadeo"></i></a>
+            <%end%>
+          </td>
         </tr> 
       <%end%>
     </tbody>
