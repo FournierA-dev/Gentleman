@@ -22,10 +22,23 @@
         <th scope="row"> Téléphone </th>
         <td><%= @player.tel_number %></td>
       </tr> 
-      <tr>
+      <tr>  
         <th scope="row"> E-mail </th>
         <td><%= @player.email %></td>
       </tr> 
+      <tr>
+        <th scope="row"> Liens pros </th>
+        <td>
+          <% if !@player.linkedin.blank?%>
+            <a href="<%= @player.linkedin %>" target="_blank" class="mx-2"><i class="fa fa-linkedin"></i></a>
+          <%end%>
+          <% if !@player.viadeo.blank?%>
+            <a href="<%= @player.viadeo %>" target="_blank" class="mx-2"><i class="fa fa-viadeo"></i></a>
+          <%end%>
+        </td>
+      </tr> 
+
+      <i class="fab fa-linkedin-in"></i>
 
   </tbody>
 </table>

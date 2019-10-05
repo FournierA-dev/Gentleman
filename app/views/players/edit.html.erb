@@ -1,2 +1,53 @@
-<h1>Players#edit</h1>
-<p>Find me in app/views/players/edit.html.erb</p>
+<!-- Bandeau d'alerte -->
+    <% if @player.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p><small>Nous n'avons pas réussi à créer le joueur pour la (ou les) raison(s) suivante(s) :</small></p>
+        <ul><small>
+          <% @player.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </small></ul>
+      </div>
+    <% end %>
+
+
+<section class ="container mt-3">
+  <h2 class="my-4">Modification de vos données personnelles</h2>
+  <!-- Formulaire -->
+  <div class="col-8 col-md-4 my-4" >
+    <%= form_for @player do |f| %>
+      <div class="form-group">
+        <label> <%=f.label :first_name,"Prénom" %> </label>
+        <%=f.text_field :first_name, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <label> <%=f.label :last_name,"Nom" %> </label>
+        <%=f.text_field :last_name, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <label> <%=f.label :role,"Rôle" %> </label>
+        <%= f.select(:role,options_for_select([['Non défini', "N/D"],['Avant', "Avant"],['Arrière', "Avant"]])) %>
+      </div>
+      <div class="form-group">
+        <label> <%=f.label :tel_number,"Telephone" %> </label>
+        <%=f.text_field :tel_number, class:'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <label> <%=f.label :linkedin,"Lien linked-in" %> </label>
+        <%=f.text_field :linkedin, class:'form-control' %>
+      </div>
+            <div class="form-group">
+        <label> <%=f.label :viadeo,"Lien viadeo" %> </label>
+        <%=f.text_field :viadeo, class:'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= render "components/returnButton" %>
+        <button type="submit" class="btn btn-success d-inline"> Modifier </button>
+      </div>
+    <% end %>
+    
+  </div>
+
+</section>

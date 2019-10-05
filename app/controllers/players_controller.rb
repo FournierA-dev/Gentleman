@@ -15,8 +15,9 @@ class PlayersController < ApplicationController
   end
 
   def update
-    if @player= Player.update(player_params)
-      redirect_to admin_players_path, success: "Joueur modifié avec succès. Un mail de confirmation a été transmis !"
+    @player = Player.find(params[:id])
+    if @player.update(player_params)
+      redirect_to player_path(current_player), success: "Informations modifiées avec succès !"
     else
       render :edit
     end
@@ -25,7 +26,7 @@ class PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:first_name,:last_name, :role, :tel_number,:email)
+    params.require(:player).permit(:first_name,:last_name, :role, :tel_number, :linkedin, :viadeo)
   end
 
 end

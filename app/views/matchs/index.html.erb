@@ -1,50 +1,56 @@
 <%= render partial: 'components/jumbotron', locals: {title: "Gentlemen league",subtitle: "Vos matchs", image: '4.jpg' } %>
 <div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Date</th>
-        <th scope="col">Equipe adverse</th>
-        <th scope="col">Score équipe</th>
-        <th scope="col">Score adversaire</th>
-        <th scope="col">ACTIONS</th>
-      </tr>
-    </thead>
-    <tbody>
 
-      <% @matchs.each_with_index do |match,index| %>
+  <% if !@teams %>
+      <h2> Vous ne faite parti d'aucune équipe... </h2>
+      <p> Rapprochez-vous de l'organisateur de l'événement </p>
+  <% else %>
+    <table class="table">
+      <thead>
         <tr>
-        <%opponent =  match.teams.where.not(id: current_player.team.id)[0]%>
-          <th scope="row"> <%= index +1 %> </th>
-          <td> 
-            <%if match.date.blank?%>
-              <%= link_to "Proposer date", edit_match_path(match), :class => 'btn btn-success' %>
-            <%else%>
-              <%= match.date %>  <%= link_to "Modifier date", "", :class => 'btn btn-warning' %>
-            <%end%>
-          </td>
-          <td> <a href="<%= team_path(opponent) %>"><%=opponent.name %></a> </td>
-          <td> 
-            <% if match.scores.where(team_id:  current_player.team.id)[0]%>
-              <%= match.scores.where(team_id:  current_player.team.id)[0].score %> 
-            <%end%>
-          </td>
-          <td> 
-            <% if match.scores.where.not(team_id:  current_player.team.id)[0]%>
-              <%= match.scores.where.not(team_id:  current_player.team.id)[0].score %> 
-            <%end%>
-          </td>
-          <td>
-            <%if match.scores.blank?%>
-              <%= link_to "Rentrer le score", new_match_score_path(match), :class => 'btn btn-success' %>
-            <%else%>
-              <%= link_to "Modifier le score", edit_match_score_path(match,match.scores.where(team_id: current_player.team.id)), :class => 'btn btn-warning' %>
-            <%end%>
-          </td>
-        </tr> 
-      <%end%>
-    </tbody>
-  </table>
-<%= link_to "Retour", :back, class:"btn btn-outline-secondary" %>
+          <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">Equipe adverse</th>
+          <th scope="col">Score équipe</th>
+          <th scope="col">Score adversaire</th>
+          <th scope="col">ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% @matchs.each_with_index do |match,index| %>
+          <tr>
+          <%opponent =  match.teams.where.not(id: current_player.team.id)[0]%>
+            <th scope="row"> <%= index +1 %> </th>
+            <td> 
+              <%if match.date.blank?%>
+                <%= link_to "Proposer date", edit_match_path(match), :class => 'btn btn-success' %>
+              <%else%>
+                <%= match.date %>  <%= link_to "Modifier date", "", :class => 'btn btn-warning' %>
+              <%end%>
+            </td>
+            <td> <a href="<%= team_path(opponent) %>"><%=opponent.name %></a> </td>
+            <td> 
+              <% if match.scores.where(team_id:  current_player.team.id)[0]%>
+                <%= match.scores.where(team_id:  current_player.team.id)[0].score %> 
+              <%end%>
+            </td>
+            <td> 
+              <% if match.scores.where.not(team_id:  current_player.team.id)[0]%>
+                <%= match.scores.where.not(team_id:  current_player.team.id)[0].score %> 
+              <%end%>
+            </td>
+            <td>
+              <%if match.scores.blank?%>
+                <%= link_to "Rentrer le score", new_match_score_path(match), :class => 'btn btn-success' %>
+              <%else%>
+                <%= link_to "Modifier le score", edit_match_score_path(match,match.scores.where(team_id: current_player.team.id)), :class => 'btn btn-warning' %>
+              <%end%>
+            </td>
+          </tr> 
+        <%end%>
+      </tbody>
+    </table>
+  <%end%>
+  <%= render "components/returnButton" %>
 </div>

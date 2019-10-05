@@ -26,7 +26,8 @@ module Admin
     end
 
     def update
-      if @player= Player.update(player_params)
+      @player = Player.find(params[:id])      
+      if @player.update(player_params)
         redirect_to admin_players_path, success: "Joueur modifié avec succès. Un mail de confirmation a été transmis !"
       else
         render :edit
