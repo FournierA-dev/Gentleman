@@ -1,2 +1,17 @@
-<h1>Teams#edit</h1>
-<p>Find me in app/views/teams/edit.html.erb</p>
+<section class ="container mt-3">
+
+  <!-- Formulaire -->
+  <div class="col-8 col-md-4 my-4" >
+    <%= form_for [:admin, @team] do |f| %>
+      <div class="form-group">
+        <label> <%=f.label :name,"Nom de l'équipe" %> </label>
+        <%=f.text_field :name, class:'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary"> Changer le nom de l'équipe </button>
+      </div>
+    <% end %>
+  </div>
+
+</section>

@@ -10,7 +10,7 @@ module Admin
         redirect_to admin_pools_path ,danger: "Aucune équipe ne peut être créée sans poule"
       end
       @team = Team.new
-      @teams = Team.all
+      @teams = Team.all.order(name: :asc)
     end
 
     def create
@@ -39,7 +39,7 @@ module Admin
       @team = Team.find(params[:id])
       if test_no_team_scores_if_pool_change?(params[:team]['pool_id'])
         if @team.update(team_params)
-          redirect_to request.referer, success: "Equipe modifiée avec succès. Un mail de confirmation a été transmis !"
+          redirect_to admin_teams_path, success: "Equipe modifiée avec succès."
         else
           render request.referer, danger: "Mise à jour impossible de l'équipe"
         end
@@ -81,7 +81,7 @@ private
     end
 
     def test_no_team_scores_if_pool_change?(pool_id)
-      if @team.pool != Pool.find(pool_id)
+      if !pool_id.blank? && @team.pool != Pool.find(pool_id)
         @team.matchs.each do |match|
           if match.scores.count > 0
             redirect_to admin_pools_path, danger: "Impossible de changer de poule car l'équipe a déjà fait des matchs"

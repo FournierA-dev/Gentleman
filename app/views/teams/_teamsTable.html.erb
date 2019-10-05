@@ -2,12 +2,12 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Equipe</th>
-        <th scope="col">Poule</th>
-        <th scope="col">Score total</th>
-        <th scope="col">Matchs joués</th>
-        <th scope="col">Points moyens / match</th>
+        <th scope="col" >#</th>
+        <th scope="col" class="text-center">Equipe</th>
+        <th scope="col" class="text-center">Poule</th>
+        <th scope="col" class="text-center">Score total</th>
+        <th scope="col" class="text-center">Matchs joués</th>
+        <th scope="col" class="text-center">Points moyens / match</th>
         <th scope="col">Joueur 1</th>
         <th scope="col">Joueur 2</th>
       </tr>
@@ -17,12 +17,12 @@
       <% teams.each_with_index do |team,index| %>
         <tr>
           <th scope="row"> <%= index +1 %> </th>
-          <td> <a href="<%= team_path(team) %>" class="class"> <%= team.name %> </a> </td>
-          <td> <%= team.pool.name %> </td>
-          <td> <%= team.total_score %></td>
-          <td> <%= team_match_done(team) %></td>
+          <td class="text-center"> <a href="<%= team_path(team) %>" class="class"> <%= team.name %> </a> </td>
+          <td class="text-center"> <%= team.pool.name %> </td>
+          <td class="text-center"> <%= team.total_score %></td>
+          <td class="text-center"> <%= team_match_done(team) %></td>
           <% if !team.total_score.blank? %>
-            <td> <%= team.total_score * 1.0 / team_match_done(team) %> </td>
+            <td class="text-center"> <%= team.total_score * 1.0 / team_match_done(team) %> </td>
           <%else%>
             <td></td>
           <%end%>
