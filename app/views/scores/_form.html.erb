@@ -10,26 +10,46 @@
       </div>
     <% end %>
 
+<div class="container text-center my-3 text-uppercase font-weight-bold">
+  Résultats du match <%=@match.teams[0].name %> / <%=@match.teams[1].name %>
+</div>
 
-<section class ="container col-6 mx-auto mt-3">
-
-  <!-- Formulaire -->
-  <div class="col-8 col-md-4 my-4" >
+<div class ="container table-responsive col-12 col-md-6">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Jeu 1</th>
+        <th scope="col">Jeu 2</th>
+        <th scope="col">Jeu 3</th>
+      </tr>
+    </thead>
+    <tbody>
     <%= form_for [@match,@team_score] do |f| %>
-      <div class="form-group">
-        <label> <%=f.label :score,"Score équipe" %> </label>
-        <%=f.text_field :score, class:'form-control' %>
-      </div>
-      <div class="form-group">
-        <label> <%=f.label "Score adversaire" %> </label>
-        <%=f.text_field :opponent_score, class:'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary"> Sauvegarder le score </button>
-      </div>
+      <tr>
+        <th scope="row"><label> <%=f.label :score,"Score équipe" %> </label></th>
+        <td><%=f.text_field :score,value: @team_score.score[0], name:"score[]", class:'form-control' %></td>
+        <td><%=f.text_field :score,value: @team_score.score[1],  name:"score[]", class:'form-control' %></td>
+        <td><%=f.text_field :score,value: @team_score.score[2],  name:"score[]", class:'form-control' %></td>
+      </tr>
+      <tr>
+        <th scope="row"><label> <%=f.label :score,"Score adversaire" %> </label></th>
+        <td><%=f.text_field :opponent_score, value: @team_score.opponent_score[0], name:"opponent_score[]", class:'form-control' %></td>
+        <td><%=f.text_field :opponent_score, value: @team_score.opponent_score[1], name:"opponent_score[]", class:'form-control' %></td>
+        <td><%=f.text_field :opponent_score, value: @team_score.opponent_score[2], name:"opponent_score[]", class:'form-control' %></td>
+      </tr>
+      
+    </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary"> Sauvegarder le score </button>
     <% end %>
-    <%= render "components/returnButton" %>
-  </div>
+  <%= render "components/returnButton" %>
+</div>
 
-</section>
+
+
+
+
+
+
+

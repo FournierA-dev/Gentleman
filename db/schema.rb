@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2019_10_04_082109) do
   end
 
   create_table "scores", force: :cascade do |t|
-    t.integer "score"
+    t.integer "score", default: [], array: true
     t.bigint "match_id"
     t.bigint "team_id"
     t.datetime "created_at", null: false

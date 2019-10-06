@@ -29,7 +29,7 @@
             <% if pool_match_count(pool) == 0%>
               0 %
             <% else %>
-              <%= pool_match_done(pool)/ (pool_match_count(pool)*1.0) * 100 %> % 
+              <%= '%02d' % (pool_match_done(pool)/ (pool_match_count(pool)*1.0) * 100) %> % 
             <% end %>
           </p>
         </div>

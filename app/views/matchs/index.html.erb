@@ -11,18 +11,25 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Date</th>
+            <th scope="col" class="text-center">Gagné/Perdu</th>
             <th scope="col" class="text-center">Adversaire</th>
-            <th scope="col" class="text-center">Score équipe</th>
-            <th scope="col" class="text-center">Score adversaire</th>
+            <th scope="col" class="text-center">Jeu 1</th>
+            <th scope="col" class="text-center">Jeu 2</th>
+            <th scope="col" class="text-center">Jeu 3</th>
             <th scope="col">ACTIONS</th>
           </tr>
         </thead>
         <tbody>
 
           <% @matchs.each_with_index do |match,index| %>
+
+<% opponent_team = match.teams.where.not(id: current_player.team.id)[0]%>
+<% team_scores_array = team_match_scores(match,current_player.team)%>
+<% opponent_scores_array = team_match_scores(match,opponent_team)%>
+
             <tr>
-            <%opponent =  match.teams.where.not(id: current_player.team.id)[0]%>
               <th scope="row"> <%= index +1 %> </th>
+
               <td> 
                 <%if match.date.blank?%>
                   <%= render partial: "dateForm", locals:{match: match, type: "create"} %>
@@ -33,19 +40,33 @@
                   <%end%>
                 <%end%>
               </td>
-              <td class="text-center"> <a href="<%= team_path(opponent) %>"><%=opponent.name %></a> </td>
-              <td class="text-center"> 
-                <% if match.scores.where(team_id:  current_player.team.id)[0]%>
-                  <%= match.scores.where(team_id:  current_player.team.id)[0].score %> 
+
+              <% gs = global_match_status(team_scores_array,opponent_scores_array) %>
+              <td class="text-center <%= gs[0] %>"> <%= gs[1] %> </td>
+
+              <td class="text-center"> <a href="<%= team_path(opponent_team) %>"><%=opponent_team.name %></a> </td>
+              <% if team_scores_array  %>
+                <% team_scores_array.count.times do |i| %>
+                  <% if team_scores_array[i] > opponent_scores_array[i] %>
+                    <% wincolor = "text-success" %>
+                  <%else%>
+                    <% wincolor = "text-danger"%>
+                  <%end%>
+                  <td class="text-center <%= wincolor %>"> 
+                    <%= team_scores_array[i]%> / <%=opponent_scores_array[i]%>
+                  </td>
                 <%end%>
-              </td>
-              <td class="text-center"> 
-                <% if match.scores.where.not(team_id:  current_player.team.id)[0]%>
-                  <%= match.scores.where.not(team_id:  current_player.team.id)[0].score %> 
-                <%end%>
-              </td>
+              <%end%>
+              <% if !team_scores_array || team_scores_array.count == 0 %>
+                <td></td> <td></td> <td></td>
+              <% elsif team_scores_array.count == 1  %>
+                <td></td> <td></td>
+              <% elsif team_scores_array.count == 2  %>
+                <td></td>
+              <% end %>
+
               <td>
-                <%if !match.date || DateTime.now > match.date %>
+                <%if match.date && DateTime.now > match.date %>
                   <%if match.scores.blank?%>
                     <%= link_to "Rentrer le score", new_match_score_path(match), :class => 'btn btn-success' %>
                   <%else%>
@@ -53,8 +74,10 @@
                   <%end%>
                 <%end%>
               </td>
+
             </tr> 
           <%end%>
+
         </tbody>
       </table>
     </div>

@@ -1,21 +1,27 @@
-<div class="container ">
+<div class="container mt-4 ">
+
   <div class="row">
-    <div class="col-12">
+    <div class="col-6 col-sm-3">
       <%= image_tag "2.jpg", class: "img-fluid rounded float-left mr-3" %>
-      <h2><%= @team.name %></h2>
+    </div>
+    <div class="col-12 col-sm-6">
+      <h2>Equipe <%= @team.name %></h2>
       <ul>
         <% @team.players.each do |player| %>
           <li class="my-3"> <%= player.role %> : <%= player.first_name %> <%= player.last_name %> </li>
         <%end%>
-        <li class="my-3">Nb matchs joués : </li>
+        <li class="my-3">Nb matchs joués : <%= team_match_done(@team) %> </li>
         <li class="my-3">% matchs gagnés : </li>
-        <li class="my-3">Nb matchs restants : </li>
+        <li class="my-3">Nb matchs restants : <%= pool_match_count(@team.pool) - team_match_done(@team) %></li>
       </ul>
     </div>
+  </div>
+
+  <div class="row">
     <div class="col-12">
       <%= render partial: "teamShowTable", locals:{team: @team} %>
       <%= render "components/returnButton" %>
     </div>
-    
   </div>
+
 </div>

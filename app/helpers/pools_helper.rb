@@ -19,10 +19,10 @@ module PoolsHelper
     match_done = 0
     pool.teams.each do |team|
       team.matchs.each do |match|
-        match_done += match.scores.count / 2
+        match_done += match.scores.count / 2.0
       end
     end
-    return match_done
+    return (match_done/2).to_i
   end
 
 

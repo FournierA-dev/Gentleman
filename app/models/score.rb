@@ -1,6 +1,6 @@
 class Score < ApplicationRecord
 
-  attr_accessor :opponent_score
+  attr_accessor :opponent_score 
 
   after_create :update_total_score
   after_update :update_total_score
