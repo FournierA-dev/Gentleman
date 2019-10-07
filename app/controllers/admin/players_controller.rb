@@ -14,6 +14,7 @@ module Admin
     def create
       @player = Player.new(player_params)
       @player.password = rand(111111..999999)
+      $mdp_temp = @player.password
       if @player.save
         redirect_to admin_players_path, success: "Joueur ajouté avec succès. Un mail d'invitation a été transmis !"
       else

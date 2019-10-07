@@ -2,6 +2,8 @@ class Player < ApplicationRecord
   before_create :default_values_if_nil
   before_update :default_values_if_nil
 
+  after_create :welcome_send
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -22,5 +24,8 @@ private
     end
   end
 
+  def welcome_send
+    PlayerMailer.welcome_email(self).deliver_now
+  end
 
 end
