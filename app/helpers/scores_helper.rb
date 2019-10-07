@@ -26,5 +26,15 @@ module ScoresHelper
     end
   end
 
+  def nb_win_match(team)
+    nb_win_match = 0
+    team.matchs.each do |match|
+      match_score = match.scores.where(team_id: team.id)[0]
+      if match_score && match_score.match_point == 2
+        nb_win_match += 1
+      end
+    end
+    return nb_win_match
+  end
 
 end

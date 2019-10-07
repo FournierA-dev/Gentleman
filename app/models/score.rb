@@ -4,6 +4,7 @@ class Score < ApplicationRecord
 
   after_create :update_total_score
   after_update :update_total_score
+  after_destroy :update_total_score
 
   belongs_to :match
   belongs_to :team

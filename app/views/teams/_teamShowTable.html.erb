@@ -7,7 +7,7 @@
           <th scope="col">#</th>
           <th scope="col">Date</th>
           <th scope="col" class="text-center">Gagné/Perdu</th>
-          <th scope="col" class="text-center">Equipe adverse</th>
+          <th scope="col" class="text-center">Adversaire</th>
           <th scope="col" class="text-center">Jeu 1</th>
           <th scope="col" class="text-center">Jeu 2</th>
           <th scope="col" class="text-center">Jeu 3</th>
@@ -16,21 +16,40 @@
       <tbody>
         <% @team.matchs.each_with_index do |match,index| %>
           <% if match.scores.count > 0 %>
-            <%opponent = match.teams.where.not(id: @team.id)[0]%>
-            <%team_score = match.scores.where(team_id:  @team.id)[0].score.to_i%>
-            <%opponent_score = match.scores.where.not(team_id:  @team.id)[0].score.to_i%>
+
+<% opponent_team = match.teams.where.not(id: @team.id)[0]%>
+<% team_scores_array = team_match_scores(match,@team)%>
+<% opponent_scores_array = team_match_scores(match,opponent_team)%>
+
             <tr>
               <th scope="row"> <%= index +1 %> </th>
               <td> <%= match.date %></td>
-                <% if team_score > opponent_score %>
-                  <td class="text-success"> Gagné</td>
-                <% else %>
-                  <td class="text-danger"> Perdu</td>
-                <% end %>
-              <td> <a href="<%= team_path(opponent) %>"> <%= opponent.name %> </a></td>
-              <td> <%= team_score %> </td>
-              <td> <%= opponent_score %> </td>
+              <% gs = global_match_status(team_scores_array,opponent_scores_array) %>
+              <td class="text-center <%= gs[0] %>"> <%= gs[1] %> </td>
+
+              <td class="text-center"> <a href="<%= team_path(opponent_team) %>"> <%= opponent_team.name %> </a></td>
+              
+              <% if team_scores_array  %>
+                <% team_scores_array.count.times do |i| %>
+                  <% if team_scores_array[i] > opponent_scores_array[i] %>
+                    <% wincolor = "text-success" %>
+                  <%else%>
+                    <% wincolor = "text-danger"%>
+                  <%end%>
+                  <td class="text-center <%= wincolor %>"> 
+                    <%= team_scores_array[i]%> / <%=opponent_scores_array[i]%>
+                  </td>
+                <%end%>
+              <%end%>
+              <% if !team_scores_array || team_scores_array.count == 0 %>
+                <td></td> <td></td> <td></td>
+              <% elsif team_scores_array.count == 1  %>
+                <td></td> <td></td>
+              <% elsif team_scores_array.count == 2  %>
+                <td></td>
+              <% end %>
             </tr> 
+
           <%end%>
         <%end%>
       </tbody>

@@ -1,5 +1,7 @@
 class ScoresController < ApplicationController
 
+  before_action :authenticate_player!  
+
   def new
     @match = Match.find(params[:match_id])
     @team_score = Score.new(match_id: @match.id, team_id: current_player.team.id)
