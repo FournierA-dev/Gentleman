@@ -20,7 +20,11 @@
             <th scope="row"> <%= index +1 %> </th>
             <td><%= player.first_name.capitalize %></td>
             <td><%= player.last_name.upcase %></td>
-            <td><%= link_to player.tel_number, "#{player.tel_number}" %></td>
+            <% if !player.tel_number.blank? %>
+              <td><%= link_to player.tel_number, "tel: #{player.tel_number}" %></td>
+            <%else%>
+              <td></td>
+            <%end%>
             <td><%= mail_to player.email.downcase %></td>
             <td><%= player.role %></td>
             <td>
