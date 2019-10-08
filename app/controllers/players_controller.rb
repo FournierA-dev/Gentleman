@@ -3,7 +3,7 @@ class PlayersController < ApplicationController
   before_action :authenticate_player!
 
   def index
-    @players=Player.all.order(last_name: :asc)
+    @players=Player.all.order(first_name: :desc).order(email: :asc)
   end
 
   def show

@@ -27,7 +27,7 @@
             <td></td>
           <%end%>
           <% team.players.each_with_index do |player,index| %>
-            <td> <%= player.first_name %>  <%= player.last_name %> </td>
+            <td> <%= player.first_name.capitalize %>  <%= player.last_name.upcase %> </td>
           <%end%>
           <%if team.players.count == 0%>
             <td></td> <td></td> 

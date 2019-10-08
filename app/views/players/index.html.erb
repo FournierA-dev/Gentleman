@@ -18,10 +18,10 @@
         <% @players.each_with_index do |player,index| %>
           <tr>
             <th scope="row"> <%= index +1 %> </th>
-            <td><%= player.first_name %></td>
-            <td><%= player.last_name %></td>
-            <td><%= player.tel_number %></td>
-            <td><%= player.email %></td>
+            <td><%= player.first_name.capitalize %></td>
+            <td><%= player.last_name.upcase %></td>
+            <td><%= link_to player.tel_number, "#{player.tel_number}" %></td>
+            <td><%= mail_to player.email.downcase %></td>
             <td><%= player.role %></td>
             <td>
               <% if !player.linkedin.blank?%>
