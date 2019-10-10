@@ -10,6 +10,7 @@
           <th scope="col">Téléphone</th>
           <th scope="col">E-mail</th>
           <th scope="col">Rôle</th>
+          <th scope="col">Pro</th>
           <th scope="col">ACTIONS</th>
 
         </tr>
@@ -23,6 +24,14 @@
             <td><%= player.tel_number %></td>
             <td><%= player.email %></td>
             <td><%= player.role %></td>
+            <td>
+              <% if !player.linkedin.blank?%>
+                <a href="<%= player.linkedin %>" target="_blank" class="mx-2"><i class="fa fa-linkedin"></i></a>
+              <%end%>
+              <% if !player.viadeo.blank?%>
+                <a href="<%= player.viadeo %>" target="_blank" class="mx-2"><i class="fa fa-viadeo"></i></a>
+              <%end%>
+            </td>
             <td>
               <%= link_to "Editer", edit_admin_player_path(player), :class => 'btn btn-warning' %>
               <%= link_to "Supprimer", admin_player_path(player), method: :delete, :confirm => 'Etes-vous sûre ?', :class => 'btn btn-danger' %>

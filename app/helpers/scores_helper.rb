@@ -15,7 +15,7 @@ module ScoresHelper
     end
     nb_victory = 0
     team_array.count.times do |i|
-      if team_array[i] > opponent_array[i]
+      if team_array[i] > opponent_array[i] || (team_array[i] == 0 && opponent_array[i] == 0)
         nb_victory += 1
       end
     end
