@@ -43,7 +43,7 @@ module Admin
     private
 
     def player_params
-      params.require(:player).permit(:first_name,:last_name, :role, :tel_number,:email)
+      params.require(:player).permit(:first_name,:last_name, :role, :tel_number,:email,:linkedin,:viadeo)
     end
 
   end
