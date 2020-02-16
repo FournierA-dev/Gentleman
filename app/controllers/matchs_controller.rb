@@ -14,7 +14,7 @@ class MatchsController < ApplicationController
   def update
     @match = Match.find(params[:id])
     if @match.update(match_params)
-      redirect_to matchs_path, success: "Date créée/modifiée avec succès ! L'équipe adverse recevra un mail de confirmation"
+      redirect_to matchs_path, success: "Date créée/modifiée avec succès !"
     else
       render matchs_path, danger: "Erreur dans la modification / création de la date de jeu"
     end

@@ -23,7 +23,7 @@ class ScoresController < ApplicationController
         puts @team_score.inspect
 
         update_match_point
-        redirect_to matchs_path, success: "Résultat du match bien enregistré. Un mail récapitulatif a été envoyé à l'équipe adverse"
+        redirect_to matchs_path, success: "Résultat du match bien enregistré."
       else
         render request.referer, danger:"Attention : scores non enregistrés !"
       end
@@ -46,7 +46,7 @@ class ScoresController < ApplicationController
     if test_results?(score_params[:score],score_params[:opponent_score])
       if @team_score.update(score: score_params[:score]) && @opponent_score.update(score: score_params[:opponent_score])
         update_match_point
-        redirect_to matchs_path, success: "Résultat du match bien modifié. Un mail récapitulatif a été envoyé à l'équipe adverse"
+        redirect_to matchs_path, success: "Résultat du match bien modifié."
       else
         render request.referer, danger:"Attention : scores non modifiés !"
       end
@@ -73,12 +73,15 @@ class ScoresController < ApplicationController
 
   def global_match_status
     nb_victory = 0
+    nb_null = 0
     @team_score.score.count.times do |i|
       if @team_score.score[i] > @opponent_score.score[i]
         nb_victory += 1
+      elsif @team_score.score[i] == @opponent_score.score[i]
+        nb_null += 1
       end
     end
-    if nb_victory > (@team_score.score.count - nb_victory)
+    if nb_victory > (@team_score.score.count - nb_null- nb_victory)
       return true
     else
       return false
