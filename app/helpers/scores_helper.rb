@@ -22,7 +22,7 @@ module ScoresHelper
         nb_null += 1
       end
     end
-    if nb_victory >= (team_array.count - nb_null)
+    if nb_victory > (team_array.count - nb_null - nb_victory)
       return "text-success","Gagné"
     else
       return "text-danger","Perdu"
