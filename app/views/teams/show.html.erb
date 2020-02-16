@@ -11,8 +11,8 @@
           <li class="my-3"> <%= player.role %> : <%= player.first_name.capitalize %> <%= player.last_name.upcase %> </li>
         <%end%>
         <li class="my-3">Nb matchs joués : <%= team_match_done(@team) %> </li>
-        <li class="my-3">% matchs gagnés : <%= nb_win_match(@team) %> </li>
-        <li class="my-3">Nb matchs restants : <%= pool_match_count(@team.pool) - team_match_done(@team) %></li>
+        <li class="my-3">% matchs gagnés : <%= (nb_win_match(@team) / team_match_done(@team) *100).round %> % </li>
+        <li class="my-3">Nb matchs restants : <%= Team.count-1 - team_match_done(@team) %></li>
       </ul>
     </div>
   </div>

@@ -22,7 +22,7 @@
           <td class="text-center"> <%= team.total_score %></td>
           <td class="text-center"> <%= team_match_done(team) %></td>
           <% if !team.total_score.blank? %>
-            <td class="text-center"> <%= team.total_score * 1.0 / team_match_done(team) %> </td>
+            <td class="text-center"> <%= (team.total_score * 1.0 / team_match_done(team)).round(1) %> </td>
           <%else%>
             <td></td>
           <%end%>

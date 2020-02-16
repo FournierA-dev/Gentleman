@@ -14,12 +14,15 @@ module ScoresHelper
       return "text-secondary","..."
     end
     nb_victory = 0
+    nb_null = 0
     team_array.count.times do |i|
-      if team_array[i] > opponent_array[i] || (team_array[i] == 0 && opponent_array[i] == 0)
+      if team_array[i] > opponent_array[i]
         nb_victory += 1
+      elsif team_array[i] == opponent_array[i]
+        nb_null += 1
       end
     end
-    if nb_victory > (team_array.count - nb_victory)
+    if nb_victory >= (team_array.count - nb_null)
       return "text-success","Gagné"
     else
       return "text-danger","Perdu"
